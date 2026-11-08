@@ -67,4 +67,6 @@ def run(normalize_fn, name):
 
 
 if __name__ == "__main__":
+    from normalize import normalize
     run(identity, "raw")
+    run(normalize, "normalized")
