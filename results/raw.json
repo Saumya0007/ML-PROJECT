@@ -1,0 +1,7 @@
+{
+  "condition": "raw",
+  "best_C": 0.5,
+  "dev_macro_f1": 0.6258,
+  "test_macro_f1": 0.693,
+  "test_accuracy": 0.6877
+}
