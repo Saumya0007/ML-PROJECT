@@ -1,0 +1,217 @@
+group,variant,canonical,freq_all_splits,variant_is_negation,canonical_is_negation,negation_compatible,example_context
+abbreviation,h,hai,1586,False,False,True,on media congress ke liye nhi h . ye toh aapko pata chal hi g
+negation,nhi,nahi,1069,True,True,True,vision media congress ke liye nhi h . ye toh aapko pata chal hi
+english_slang,u,you,832,False,False,True,il hai mushkil .... 💘🙈 i love u <user> ❤ !! <url> …
+spelling,wo,woh,628,False,False,True,pta ki ramcharitmanas kya hai wo bhej rahe h bjp neta ko phle 
+abbreviation,kr,kar,545,False,False,True,<user> abroad property rakh kr chhupane wal respectfull hota
+spelling,kyu,kyun,285,False,False,True,le .. sarkar aur sena dono .. kyu bola usne aisa isko gira … <u
+abbreviation,rha,raha,218,False,False,True,stark ka dil toh ye leke ghum rha hai 😂😂
+spelling,apko,aapko,213,False,False,True, esko jarur solve karenge mai apko bar bar tha … <url> co / rawf
+english_slang,ur,your,160,False,False,True,er> on your victory . we want ur back n now finally ur back wi
+spelling,sala,saala,157,False,False,True,ser> tujh jaisa bhadave dalal sala apne ko … <url>
+abbreviation,gya,gaya,145,False,False,True,h . ye toh aapko pata chal hi gya hoga . achha hoga ki congress
+spelling,apke,aapke,135,False,False,True, <user> sadji kisi ne bheja h apke liye <url>
+abbreviation,rhe,rahe,128,False,False,True,o jo sale itne berahm se maar rhe ho modi dekhna be sale tere …
+english_slang,plz,please,127,False,False,True, almighty <user> papa ji ❤️ 🌲 plz bless me & my family more sew
+abbreviation,sb,sab,122,False,False,True,a darwaza kbi off nai krta jo sb k lyhe ache ehsas aor dua dil
+spelling,saath,sath,121,False,False,True,<user> <user> jo bjp ke saath nahi woh atankwadi h aour jo 
+spelling,apka,aapka,118,False,False,True,e kamalka banshiwala shubh ho apka e jatra
+spelling,jyada,zyada,113,False,False,True, chhez hai .. apne ghutno par jyada jor mat dalo and go to kitche
+spelling,acha,achha,112,False,False,True, notifications bekaar thay ab acha lag raha hai 😍😍
+spelling,hun,hoon,111,False,False,True, ..... main unse kehna chahti hun ki is baar mere dada ye v sap
+negation,nahin,nahi,103,True,True,True,ye kaafi hai ki ham dushman nahin hain wafa'dari ka daawa kyun 
+abbreviation,agr,agar,103,False,False,True, phr agli eidi pr bheju ga na agr kamiyaab hua 🤣 is pr to khud 
+abbreviation,krta,karta,102,False,False,True, k dil ka darwaza kbi off nai krta jo sb k lyhe ache ehsas aor d
+spelling,vo,woh,99,False,False,True,es mile .... matlab wanha bhi vo … <url>
+abbreviation,krne,karne,96,False,False,True,heeno ko advance eid msg send krne ka dhora par jna 😹
+spelling,hein,hain,94,False,False,True,t !!!!!!!!!!!! dil krta sunte hein rhein ..... 😊 🌸 allah bless u
+abbreviation,pta,pata,94,False,False,True,<user> jinko khud nahi pta ki ramcharitmanas kya hai wo 
+spelling,apki,aapki,93,False,False,True,movie jo dil ko chhu gayi woh apki movie mulk hain kudos to you 
+abbreviation,kro,karo,89,False,False,True,democracy ka majak udana band kro thoda competition dete aur ye
+spelling,tou,toh,88,False,False,True,laya k agar khan sb aajayenge tou indian media modi kochour kar
+abbreviation,gyi,gayi,87,False,False,True,rey ye meri didi depressed ho gyi 😨😨😨😨😨 bechari chlo 5 din me r
+spelling,kuchh,kuch,80,False,False,True,i ki bhi seema hoti hai ek .. kuchh bhi kar ke ‘ behan jaisa maan
+spelling,pahle,pehle,78,False,False,True,<user> desh bad mein sudhrega pahle in haramiyo ko pakad kar khud
+spelling,bohot,bahut,76,False,False,True,bharta h to usme burai nahi h bohot sare com … <url>
+abbreviation,rhi,rahi,69,False,False,True,n ki statement sach saabit ho rhi h pehla hi match buri tarah s
+abbreviation,jb,jab,67,False,False,True,yu # evm se chunaw krwate hai jb ke # pakistan me # beletpepar
+spelling,achi,achhi,67,False,False,True,bhatt dear zindagi movie bhot achi thi hit bhi hui thi aur yr lo
+spelling,pyar,pyaar,66,False,False,True,a dadkha hai dil a yar mil ye pyar ka izhar hai kaho na pyar hai
+spelling,bahot,bahut,65,False,False,True,<user> _ patrag nafrat bahot ho chuki abh 4 saal tho araam
+abbreviation,bht,bahut,64,False,False,True,hain bhole log 😉 ek hote hain bht bhole log 😅 phr ate hain wo l
+spelling,kyo,kyun,63,False,False,True,<user> abe wo gutteruddin kyo fake news faila ke apni maa b
+spelling,thik,theek,59,False,False,True,<user> <user> aap thik se dekhe nhi video ko wo dra 
+abbreviation,gye,gaye,58,False,False,True, <user> _ rathee <user> lo aa gye ye gaandu andhbhakt khud ka j
+spelling,bohat,bahut,58,False,False,True,<user> or bohat pakhtono ko pashtunistaan ka 
+abbreviation,hn,haan,58,False,False,True,ka lia har namaz me duaa krti hn apka nam la ka r aesa …
+abbreviation,tk,tak,57,False,False,True,ospital ke chakker lagate abi tk doctor ne koi medisen nhi di 
+abbreviation,krna,karna,56,False,False,True,e hain ab mujhy unfollower mt krna warna allah pochy ga tum logo
+spelling,jese,jaise,54,False,False,True,udy mehengi ho jayengi to hum jese logh padh nahi payenge
+spelling,bhot,bahut,54,False,False,True,alia bhatt dear zindagi movie bhot achi thi hit bhi hui thi aur 
+english_slang,pls,please,53,False,False,True,ki guruji modi h to mumkinn h pls trust our pm
+spelling,kyuki,kyunki,53,False,False,True,in aapko vote isliye nhi diya kyuki aapne itne galat decisi … <ur
+abbreviation,kch,kuch,50,False,False,True,ka to mjhe pata nahi but aesa kch matter nahi krta 😛 <url>
+abbreviation,krte,karte,50,False,False,True, hein jo like kiyr beghair rt krte 😪 barre hi chawal hote 😪
+spelling,accha,achha,47,False,False,True,hatgi <user> bilkul sahi inse accha toh 20 crore kutte paal l … <
+spelling,kyon,kyun,45,False,False,True,<user> _ a _ mirza kyon matlab english zubaan mein du
+abbreviation,kbhi,kabhi,45,False,False,True, years old girl jaanu tm mjhe kbhi chor k tou nhi jaogay na ? he
+spelling,umid,umeed,43,False,False,True, kare ham indian ko apse yahi umid hai
+spelling,yar,yaar,43,False,False,True,a dadka hota dadkha hai dil a yar mil ye pyar ka izhar hai kaho
+english_slang,gud,good,43,False,False,True,<user> gud news ab eis ko treason ki saz
+abbreviation,phr,phir,43,False,False,True,user> match zaror dekhna dukh phr jhalna ye khel hai talent ka 
+spelling,humare,hamare,40,False,False,True,humare desh k bachoon ko aboard jane
+abbreviation,ghr,ghar,35,False,False,True,ati h n pics upload krti bina ghr walu ki ijazat k 😕😕
+negation,nehi,nahi,35,True,True,True,ion ki purani chal hai . kuch nehi honewala isse .
+abbreviation,krti,karti,35,False,False,True,ai ids banati h n pics upload krti bina ghr walu ki ijazat k 😕😕
+abbreviation,lga,laga,33,False,False,True,rna ajnabiyo ka aana jaana to lga rehta 🔥🙏 # loveall
+abbreviation,kre,kare,31,False,False,True,triot .. allah darjaat buland kre . a'meen <url>
+spelling,hmesha,hamesha,29,False,False,True, allah buri nazar se bxhae or hmesha ap khush rho ameen
+spelling,appki,aapki,28,False,False,True,<user> allah pak app aur appki ki family ko sabr-e-jameel at
+spelling,chaiye,chahiye,28,False,False,True, okt ye hai .. ye dar to hona chaiye ... aur bhindi timatar bc … <
+spelling,poora,pura,28,False,False,True,main jitni touchy hain aap ko poora world cup tang … <url>
+spelling,ummid,umeed,28,False,False,True,aapko dher sari shubhakamnyen ummid hi aapke isa karykala me desh
+spelling,bhee,bhi,28,False,False,True,chahenge do char hamare or se bhee k … <url>
+abbreviation,skta,sakta,27,False,False,True,wan gadha aur kutte ka bhi ho skta h . ye gyan proof shit h .
+abbreviation,bta,bata,27,False,False,True,ka chamcha tuje pta nhi ho to bta du mathura mai ramjan mai las
+english_slang,luv,love,27,False,False,True,r absence is highly felt mama luv u always may 29th wil never b
+spelling,sayad,shayad,26,False,False,True,<user> <user> <user> sayad vo khin or bhi thi mujhse peh
+english_slang,ppl,people,25,False,False,True,rt <user> u do things for ppl u adore because u just want t
+spelling,behan,behen,24,False,False,True, hai ek .. kuchh bhi kar ke ‘ behan jaisa maan ke thappad maara ’
+spelling,kese,kaise,24,False,False,True,ikhaya kissi ki bhen ki izzat kese kr … <url>
+spelling,acche,achhe,24,False,False,True,lta hai chinta na kare . apne acche karm kiye apna dha … <url>
+spelling,tarha,tarah,23,False,False,True,<user> _ 😁 kuty ki dum ki tarha tharki logo ki koi b age ho w
+abbreviation,trah,tarah,23,False,False,True,shy kar k ye suwar samjhty is trah ki bakwas kar k humein sasti 
+spelling,waale,wale,23,False,False,True,er> <user> _ by _ two wasooli waale dhundte hain isko 😂😂 ghanta f
+english_slang,coz,because,23,False,False,True,ush raho ! i'll pray for u .. coz i know nafrat se kabhi kis … 
+spelling,jada,zyada,21,False,False,True,<user> <user> bhai mere like jada hai mera paytm no 9877279678 
+spelling,chutia,chutiya,21,False,False,True,<user> if i call u chutia from a fake account will u be
+spelling,khus,khush,20,False,False,True,ham sab aaj bahut khus hai aaj pm narendra modi ji d
+abbreviation,krke,karke,20,False,False,True,<user> tum bjp ka apman krke jnta ka apman kr rhe ho agr m
+spelling,appko,aapko,19,False,False,True,ain ek jajav samaj see hu aur appko samathan karta hu lakin sir a
+spelling,acchi,achhi,19,False,False,True,hai kay khud ko our leader ko acchi our jamey g … <url>
+spelling,humari,hamari,19,False,False,True, dusre karyakaal ke liye .... humari apse apeksha hai ki jo apne p
+spelling,bhaut,bahut,19,False,False,True,n of you bcz aap jaisa insaan bhaut kam hi milte hai hmre desh or
+spelling,kyonki,kyunki,18,False,False,True,man me koi difference nhi hai kyonki dono hi allah and his … <url>
+spelling,shadi,shaadi,18,False,False,True,er> jabh sarkaar 😍 aap ki bhe shadi ho jayegi aap ko ptaaa chal …
+spelling,jyda,zyada,17,False,False,True,<user> jyda gyan na pelo aur democracy ka
+spelling,jhut,jhoot,17,False,False,True,thout any proof leader evm pe jhut bol rhe ec chup kyu hai koi a
+english_slang,frnd,friend,17,False,False,True, shona their will be one best frnd who knows the importance of y
+spelling,bahan,behen,17,False,False,True,user> <user> sun main ni teri bahan jarur hogi . ar baar dancer b
+spelling,aacha,achha,16,False,False,True,ser> salmanji aap bahut bahut aacha dikh rahey hai aaj . bahut kh
+english_slang,thanku,thanks,16,False,False,True,# thegiftofeducation thanku so much guru ji aapki rehmat 
+spelling,zada,zyada,16,False,False,True,ln ' '' memo-gate o dawm-leak zada '' ya ke cancer se bhare gadd
+spelling,boht,bahut,16,False,False,True,<user> too waqie boht bra haraami hi nahi bul k wal
+spelling,jesa,jaisa,15,False,False,True,hart fit rah sakta hai israel jesa es umid ke saath pahala vote 
+spelling,achcha,achha,15,False,False,True,<user> achcha hain janaab social media pe n
+abbreviation,kbi,kabhi,15,False,False,True,allah pak os k dil ka darwaza kbi off nai krta jo sb k lyhe ach
+english_slang,bday,birthday,15,False,False,True, _ youkiss <user> _ nia happy bday jit . hope you enjoy it and b
+abbreviation,btaya,bataya,15,False,False,True,rt <user> pakistan ko kisi ne btaya nahi t20 world cup nahi h ye 
+abbreviation,tarh,tarah,15,False,False,True, color 😘👌 vg agr long hair is tarh b rakho to 👌😴😴
+spelling,humara,hamara,15,False,False,True,user> sir g congrats . i hope humara desh aur age jaye . aapse bhu
+spelling,kabi,kabhi,15,False,False,True,ray k ye manhoos insan dobara kabi pakistan me azab ki surat me 
+abbreviation,kb,kab,15,False,False,True,5 salo m india itni berojgari kb nhi hui . dear modi j … <url>
+spelling,voh,woh,15,False,False,True,i why are you single ? ab mai voh launda toh hu nhi jo itni …
+spelling,ummeed,umeed,15,False,False,True,s ne ye faisla liya hai . aur ummeed karta hoon k desh ke sabhi pa
+spelling,isiliye,isliye,15,False,False,True,u kya kar lega be ? tum saale isiliye zaleel ho rahe 1000 saal se .
+spelling,dhoka,dhokha,14,False,False,True,<user> ji nahi aap vi dhoka kha gaye ye evm media aur pra
+spelling,bhout,bahut,14,False,False,True,<user> bahi ma aapka bhout bada fan ho you are my idol b
+spelling,bohut,bahut,14,False,False,True,> _ om islaam kabool karne ki bohut aag lagi thi jawaani ka bhoot
+abbreviation,trha,tarah,14,False,False,True,<user> <user> nhi g ham ap ki trha nhi he ptwari ki olad ham pak
+spelling,chahye,chahiye,14,False,False,True,<user> _ chahye <user> in ka hisab allah pak 
+english_slang,bcz,because,14,False,False,True,ot ko such manker vote krdiya bcz of govt foult terror bring … 
+spelling,phele,pehle,13,False,False,True,> <user> <user> <user> <user> phele to is fake account ko band kr
+spelling,kesi,kaisi,13,False,False,True, nigga called me “ fake playa kesi ” lmfaoooooooo omfg
+abbreviation,srf,sirf,13,False,False,True,srf 1 day left us insan ke brday 
+abbreviation,skte,sakte,13,False,False,True,call kiye hai life ke gin nhi skte lekin kabhi bhi screenshot le
+spelling,jhuth,jhoot,13,False,False,True,wo kiya jumle nahi fenke usne jhuth bada ho gay … <url>
+spelling,chootiya,chutiya,13,False,False,True,<user> <user> log kitna bara chootiya hy jhoot ko such manker vote 
+spelling,humesa,hamesha,12,False,False,True,hein abaad rahein allah ap ko humesa salamat rakhe ap jaise logon 
+spelling,hamaare,hamare,12,False,False,True,hamaare chunnu babau modi ji bahut ba
+spelling,hamesa,hamesha,12,False,False,True,ou .... allah blessed you aap hamesa healthy rahain aapko hum sabk
+spelling,kiu,kyun,11,False,False,True,<user> <user> <user> kiu tu bhejege travel agent hai k
+spelling,bahoot,bahut,11,False,False,True,user> <user> apko second tirm bahoot bahoot mubarak ho ummeed hai 
+spelling,pehlay,pehle,11,False,False,True,g tou mein nai final sai kafi pehlay chor di thi
+spelling,chahie,chahiye,11,False,False,True,tan ke sath match nahi khelna chahie aur aj khud paki … <url>
+spelling,ghatia,ghatiya,11,False,False,True,ye bohat bad zaban wazeer hai ghatia aurat
+negation,nahe,nahi,11,True,True,True, sala preshan kaniya ne shadi nahe ki kahe pho … <url> co / qbc1
+abbreviation,kerte,karte,11,False,False,True,ota khor corrupt ganje ki bhi kerte thy kia ukhar lia unhon ne la
+spelling,humesha,hamesha,11,False,False,True,achwa dete toh aisa nahi hota humesha sarkari maal udane se … <url>
+spelling,appka,aapka,11,False,False,True,modi ji appka most welcome to pm india <url
+spelling,waala,wala,10,False,False,True,writer dada dono hi nahi aane waala hai kyunki aane ka copyright 
+english_slang,cuz,because,10,False,False,True,ilm ever made . favorite away cuz you aint wrong 🙏
+spelling,jindagi,zindagi,10,False,False,True, bhi nahi jo jina parega wohi jindagi age badhte hue peeche chalne 
+abbreviation,kerna,karna,10,False,False,True,e kisi din aap se ek mulakaat kerna log netaaon k fan hote hain m
+spelling,juth,jhoot,10,False,False,True,ghoonghroo seth good joke aur juth mat boliye sir ab sahan nahi 
+spelling,bahen,behen,10,False,False,True,chipka ker rakhy hai yeh bhai bahen ka pyar hai ..… <url>
+spelling,jesi,jaisi,10,False,False,True,er> thank you <user> # padman jesi movie ke liye ye movie har ld
+spelling,bahat,bahut,10,False,False,True,modi ji desh ke liye bahat hi hitkar kam kiye he jo he s
+spelling,hmesa,hamesha,9,False,False,True,ke vachno per hi chlte rhenge hmesa # 60millionstand …
+spelling,jhooth,jhoot,8,False,False,True,tum bhi tumhare neta ki tarah jhooth bolte ho . ab to samay yeh ha
+abbreviation,mjhe,mujhe,8,False,False,True, nahi ho or wese shakal ka to mjhe pata nahi but aesa kch matter
+english_slang,bcoz,because,8,False,False,True,i zain ko avni kyu pasand hai bcoz she is not too girlish she is
+abbreviation,skty,sakte,8,False,False,True, age ho wo thark pan ni chord skty kai log tu larki ko ghr k a …
+spelling,paani,pani,8,False,False,True,di ji u . p me electricity or paani ka dekh lo haala … <url>
+spelling,jindgi,zindagi,7,False,False,True,tut jayenge re owesi dhang se jindgi jini h to ji warna batade pol
+spelling,zindgi,zindagi,7,False,False,True,ya allah zalimo ko lambi zindgi ata farma or inke sath bi aes
+spelling,jaisay,jaise,7,False,False,True,o is mulk k liye ho .. aor is jaisay bc ko ambassador bnya tha .. 
+english_slang,abt,about,6,False,False,True,ndorsing new eam i feel proud abt u .
+english_slang,sry,sorry,6,False,False,True,ra hi aasra 🙏 i'm really very sry for ol my mistakes 🙏 plz … <u
+english_slang,plzz,please,6,False,False,True,<user> <user> <user> kaun hai plzz ek name bta do jo congress me
+negation,nahee,nahi,6,True,True,True,r> khan sb ko modi ne is liay nahee bulaya k agar khan sb aajayen
+negation,nahii,nahi,6,True,True,True,tere gundo ki sena ki jaroort nahii — - bas tere jaise gundo ka s
+spelling,thek,theek,6,False,False,True,ar hota hay ... humne to runs thek he bnaye thay ab goron ko nah
+spelling,kesa,kaisa,6,False,False,True,iction kohi bhi nahi diya yee kesa crictic bana re
+spelling,waali,wali,6,False,False,True,deer ke msg ke wajah se block waali chudaap aur bachhon waali har
+spelling,shayed,shayad,6,False,False,True,<user> <user> hum shayed pyare to nahi magar humare bh
+spelling,islie,isliye,5,False,False,True,rt <user> evms are hacked islie hum nahi jeetenge is just a g
+english_slang,plss,please,5,False,False,True,th rhna wha .. meri laj rkhna plss .. mjhse … <url>
+english_slang,thx,thanks,5,False,False,True,thx to every single memer for mak
+spelling,mujhey,mujhe,5,False,False,True, blossom _ 22 <user> _ sheikh mujhey lgta hai rozey ki waja se ap 
+abbreviation,kerta,karta,5,False,False,True,user> <user> ya true waise ye kerta kya tha desh ko andhere may d
+negation,nhin,nahi,5,True,True,True,ser> <user> _ krishna dr saab nhin aisa mat kariye daaru lever k
+spelling,aachi,achhi,4,False,False,True,ki tarif nhi karta but app ek aachi leader lagi mujhe great 👍
+spelling,achaa,achha,4,False,False,True, pura jakeen hai .. aap bohat achaa home minister honga .. )
+negation,nhii,nahi,4,True,True,True,pke apkie ammi kie tbiyt thik nhii hena aap mjhse medicine lalo 
+spelling,tarhan,tarah,4,False,False,True,y ko yyhi kyhtay hain k is ke tarhan ban'na hai us ke tarhan ban'n
+spelling,kaisay,kaise,4,False,False,True,'s ok should i just ask ? aap kaisay hain ? 😔
+english_slang,wht,what,3,False,False,True,ok im just wondering ! wht do u guys think is the best k
+spelling,bhii,bhi,3,False,False,True,acha lg rha ...😎 mgr phr bhii acha nhe lgta ..😏🙁 <url>
+spelling,mujhay,mujhe,3,False,False,True,t <user> trust me zindagi may mujhay kabhi itni khushi nahi hoti j
+english_slang,thnx,thanks,3,False,False,True,bless u & family bless too ji thnx bhai ji 🙏🙏
+english_slang,tym,time,3,False,False,True,<user> kafi tym baad is chutiye ko dkha bhenk
+spelling,hamaari,hamari,3,False,False,True,ki nazar se bachaaye 😍 tum ko hamaari umar lag jaaye 😊 tumhen aur k
+spelling,theak,theek,3,False,False,True,_ well done sabir bhai bilkul theak kha app na hamian pakistan ma
+spelling,aache,achhe,3,False,False,True, ho be jab saale tum jeete to aache kaam ki wajah se jeete or jab
+negation,nehin,nahi,3,True,True,True,rt <user> _ srkians main nehin koi aur rahul hi sahi all the
+english_slang,wat,what,2,False,False,True,s ek van nog n boer of boerin wat vermoorgemartel isdan gaan n 
+abbreviation,tmhe,tumhe,2,False,False,True,<user> jalan tw tmhe aese horhi jese tmhare baap k
+english_slang,nyc,nice,2,False,False,True,er> so when are you coming to nyc with chiz so i can eat your a
+english_slang,frnds,friends,2,False,False,True,i hi kyun 😠 🙆🙆😜😜😛😪 gd morning frnds 💓💖💗❤
+spelling,appke,aapke,2,False,False,True,esh ke liya 7085987767 . desh appke habale kordiya app age barte 
+english_slang,pple,people,1,False,False,True,er> bhot phle hi karna chaiye pple of india have destroyed congr
+english_slang,tmrw,tomorrow,1,False,False,True,<user> _ and tmrw is last jumma of ramadan so d
+english_slang,thanx,thanks,1,False,False,True,rt <user> _ insan1 <user> thanx my sweet lovely dii # msg pap
+spelling,chaahiye,chahiye,1,False,False,True,chha prayaas hai aur hona bhi chaahiye . har ek gaon me ek bhim army
+spelling,kyunke,kyunki,1,False,False,True,ahi huva tu hum nahi manege . kyunke desh me jana maana gunda bhi 
+spelling,chutiyaa,chutiya,1,False,False,True,ul gyi lakin tum apni chu chu chutiyaa wali harkat band nhi kroge hn
+spelling,ghatiyaa,ghatiya,1,False,False,True,ir but jab iss desh k log iss ghatiyaa religion islam ko … <url>
+spelling,zyda,zyada,1,False,False,True,ested rhte hai bride groom ko zyda pareshan nhe krte
+english_slang,wid,with,1,False,False,True,'s may # msg papa bless u oll wid good health sewa simran nd pa
+spelling,achhii,achhi,0,False,False,True,
+spelling,achhey,achhe,0,False,False,True,
+spelling,chahiyee,chahiye,0,False,False,True,
+spelling,kyuke,kyunki,0,False,False,True,
+spelling,kyoon,kyun,0,False,False,True,
+negation,nahiin,nahi,0,True,True,True,
+spelling,acchaa,achha,0,False,False,True,
+spelling,aachha,achha,0,False,False,True,
+spelling,abhii,abhi,0,False,False,True,
+spelling,zindagee,zindagi,0,False,False,True,
+spelling,khushh,khush,0,False,False,True,
+spelling,hamaara,hamara,0,False,False,True,
+spelling,dekhoo,dekho,0,False,False,True,
+spelling,wooh,woh,0,False,False,True,
+english_slang,tnx,thanks,0,False,False,True,
+english_slang,tomorow,tomorrow,0,False,False,True,
+english_slang,awsm,awesome,0,False,False,True,
+english_slang,hapy,happy,0,False,False,True,

@@ -1,7 +1,16 @@
 {
   "condition": "raw",
-  "best_C": 0.5,
-  "dev_macro_f1": 0.6258,
-  "test_macro_f1": 0.693,
-  "test_accuracy": 0.6877
+  "use_char_ngrams": true,
+  "best_C": 0.25,
+  "dev_macro_f1": 0.6249,
+  "test_macro_f1": 0.6865,
+  "test_accuracy": 0.6813,
+  "n_features": 68053,
+  "dev_macro_f1_by_C": {
+    "0.1": 0.6214,
+    "0.25": 0.6249,
+    "0.5": 0.6243,
+    "1": 0.6219,
+    "2": 0.612
+  }
 }

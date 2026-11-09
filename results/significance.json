@@ -1,0 +1,19 @@
+{
+  "n_test": 3000,
+  "raw_only_correct": 86,
+  "normalized_only_correct": 90,
+  "both_correct": 1958,
+  "both_wrong": 866,
+  "predictions_changed": 190,
+  "mcnemar_p": 0.8211,
+  "macro_f1_diff_mean": 0.0013,
+  "macro_f1_diff_95ci": [
+    -0.0073,
+    0.0096
+  ],
+  "accuracy_diff_mean": 0.0014,
+  "accuracy_diff_95ci": [
+    -0.0073,
+    0.0097
+  ]
+}

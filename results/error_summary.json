@@ -1,0 +1,82 @@
+{
+  "n_test": 3000,
+  "errors_raw": 956,
+  "errors_normalized": 952,
+  "primary_category_of_raw_errors": {
+    "other (sarcasm, context, neutral ambiguity)": 419,
+    "spelling variation": 200,
+    "negation": 191,
+    "slang/abbreviation": 146
+  },
+  "error_rate_with_flag_raw": {
+    "spelling_variant": 0.3067,
+    "slang_abbrev": 0.307,
+    "negation": 0.3576
+  },
+  "error_rate_without_flag_raw": {
+    "spelling_variant": 0.322,
+    "slang_abbrev": 0.322,
+    "negation": 0.2999
+  },
+  "fixed_by_normalization": 90,
+  "broken_by_normalization": 86,
+  "broken_with_negation_in_sentence": 35,
+  "changed_sentences": {
+    "n": 1127,
+    "fixed": 38,
+    "broken": 43,
+    "prediction_flips": 85,
+    "broken_with_negation": 26,
+    "fixed_with_negation": 20,
+    "flips_with_negation": 50,
+    "with_negation": 476
+  },
+  "unchanged_sentences": {
+    "n": 1873,
+    "fixed": 52,
+    "broken": 43,
+    "prediction_flips": 105
+  },
+  "subsets": {
+    "changed_by_normalization": {
+      "n": 1127,
+      "raw_acc": 0.693,
+      "norm_acc": 0.6886,
+      "raw_macro_f1": 0.6972,
+      "norm_macro_f1": 0.6917
+    },
+    "unchanged": {
+      "n": 1873,
+      "raw_acc": 0.6743,
+      "norm_acc": 0.6791,
+      "raw_macro_f1": 0.6769,
+      "norm_macro_f1": 0.6815
+    },
+    "has_negation": {
+      "n": 976,
+      "raw_acc": 0.6424,
+      "norm_acc": 0.6475,
+      "raw_macro_f1": 0.588,
+      "norm_macro_f1": 0.5923
+    },
+    "has_spelling_variant": {
+      "n": 652,
+      "raw_acc": 0.6933,
+      "norm_acc": 0.6948,
+      "raw_macro_f1": 0.697,
+      "norm_macro_f1": 0.6963
+    },
+    "has_slang_abbrev": {
+      "n": 671,
+      "raw_acc": 0.693,
+      "norm_acc": 0.6855,
+      "raw_macro_f1": 0.6977,
+      "norm_macro_f1": 0.69
+    }
+  },
+  "churn_reference_raw_C025_vs_C05_flip_pct": 4.33,
+  "flip_pct_changed_sentences": 7.54,
+  "flip_pct_unchanged_sentences": 5.61,
+  "share_of_raw_errors_with_true_neutral": 0.4017,
+  "share_of_raw_errors_with_pred_neutral": 0.5262
+}

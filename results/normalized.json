@@ -1,7 +1,16 @@
 {
   "condition": "normalized",
+  "use_char_ngrams": true,
   "best_C": 0.5,
-  "dev_macro_f1": 0.6286,
-  "test_macro_f1": 0.6906,
-  "test_accuracy": 0.6853
+  "dev_macro_f1": 0.6306,
+  "test_macro_f1": 0.6877,
+  "test_accuracy": 0.6827,
+  "n_features": 67745,
+  "dev_macro_f1_by_C": {
+    "0.1": 0.6252,
+    "0.25": 0.6256,
+    "0.5": 0.6306,
+    "1": 0.6274,
+    "2": 0.6132
+  }
 }

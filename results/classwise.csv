@@ -1,0 +1,7 @@
+condition,class,precision,recall,f1,support
+raw,negative,0.7407,0.6856,0.7121,900
+raw,neutral,0.5874,0.6509,0.6175,1100
+raw,positive,0.75,0.711,0.73,1000
+normalized,negative,0.7367,0.6933,0.7144,900
+normalized,neutral,0.5913,0.6536,0.6209,1100
+normalized,positive,0.7524,0.705,0.7279,1000

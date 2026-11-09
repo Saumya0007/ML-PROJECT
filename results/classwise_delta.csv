@@ -1,0 +1,4 @@
+class,normalized,raw,delta_f1
+negative,0.7144,0.7121,0.0023
+neutral,0.6209,0.6175,0.0034
+positive,0.7279,0.73,-0.002

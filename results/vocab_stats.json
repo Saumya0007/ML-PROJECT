@@ -1,0 +1,19 @@
+{
+  "raw": {
+    "train_types": 33567,
+    "train_types_df2": 12452,
+    "test_oov_rate_df1_pct": 10.249,
+    "test_oov_rate_df2_pct": 13.444,
+    "train_tokens": 265183
+  },
+  "normalized": {
+    "train_types": 33152,
+    "train_types_df2": 12237,
+    "test_oov_rate_df1_pct": 10.12,
+    "test_oov_rate_df2_pct": 13.29,
+    "train_tokens": 266789
+  },
+  "variant_token_share_pct": 2.37,
+  "types_reduction_pct": 1.24,
+  "types_df2_reduction_pct": 1.73
+}

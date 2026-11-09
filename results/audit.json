@@ -1,0 +1,30 @@
+{
+  "rules_total": 216,
+  "rules_observed_in_data": 198,
+  "rules_negation_incompatible": 0,
+  "sentences_total": 20000,
+  "sentences_changed": 7687,
+  "sentences_changed_pct": 38.44,
+  "test_sentences_changed": 1127,
+  "negation_tokens_lost": 0,
+  "negation_tokens_recovered_by_normalization": 8,
+  "negation_count_unchanged": 7679,
+  "mean_tokens_changed_per_changed_sentence": 1.62,
+  "sentences_changed_by_negation": 1108,
+  "sentences_changed_by_spelling": 3636,
+  "sentences_changed_by_abbreviation": 2924,
+  "sentences_changed_by_english_slang": 1132,
+  "sentences_changed_by_elongation": 816,
+  "top10_rules": [
+    "h->hai (1586)",
+    "nhi->nahi (1069)",
+    "u->you (832)",
+    "wo->woh (628)",
+    "kr->kar (545)",
+    "kyu->kyun (285)",
+    "rha->raha (218)",
+    "apko->aapko (213)",
+    "ur->your (160)",
+    "sala->saala (157)"
+  ]
+}
