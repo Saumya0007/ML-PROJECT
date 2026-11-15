@@ -1,0 +1,82 @@
+@inproceedings{patwa2020semeval,
+  author = {Patwa, Parth and Aguilar, Gustavo and Kar, Sudipta and Pandey, Suraj and PYKL, Srinivas and Gamb{\"a}ck, Bj{\"o}rn and Chakraborty, Tanmoy and Solorio, Thamar and Das, Amitava},
+  title = {{SemEval-2020 Task 9}: Overview of Sentiment Analysis of Code-Mixed Tweets},
+  booktitle = {Proc.\ Fourteenth Workshop on Semantic Evaluation (SemEval)},
+  pages = {774--790},
+  year = {2020}
+}
+@inproceedings{joshi2016subword,
+  author = {Joshi, Aditya and Prabhu, Ameya and Shrivastava, Manish and Varma, Vasudeva},
+  title = {Towards Sub-Word Level Compositions for Sentiment Analysis of {Hindi-English} Code Mixed Text},
+  booktitle = {Proc.\ COLING},
+  pages = {2482--2491},
+  year = {2016}
+}
+@inproceedings{khanuja2020gluecos,
+  author = {Khanuja, Simran and Dandapat, Sandipan and Srinivasan, Anirudh and Sitaram, Sunayana and Choudhury, Monojit},
+  title = {{GLUECoS}: An Evaluation Benchmark for Code-Switched {NLP}},
+  booktitle = {Proc.\ ACL},
+  pages = {3575--3585},
+  year = {2020}
+}
+@inproceedings{barman2014code,
+  author = {Barman, Utsab and Das, Amitava and Wagner, Joachim and Foster, Jennifer},
+  title = {Code Mixing: A Challenge for Language Identification in the Language of Social Media},
+  booktitle = {Proc.\ First Workshop on Computational Approaches to Code Switching},
+  pages = {13--23},
+  year = {2014}
+}
+@inproceedings{eisenstein2013bad,
+  author = {Eisenstein, Jacob},
+  title = {What to do about bad language on the internet},
+  booktitle = {Proc.\ NAACL-HLT},
+  pages = {359--369},
+  year = {2013}
+}
+@inproceedings{han2011lexical,
+  author = {Han, Bo and Baldwin, Timothy},
+  title = {Lexical Normalisation of Short Text Messages: {Makn} Sens a \#twitter},
+  booktitle = {Proc.\ ACL},
+  pages = {368--378},
+  year = {2011}
+}
+@article{sproat2001normalization,
+  author = {Sproat, Richard and Black, Alan W. and Chen, Stanley and Kumar, Shankar and Ostendorf, Mari and Richards, Christopher},
+  title = {Normalization of non-standard words},
+  journal = {Computer Speech \& Language},
+  volume = {15}, number = {3}, pages = {287--333}, year = {2001}
+}
+@inproceedings{belinkov2018synthetic,
+  author = {Belinkov, Yonatan and Bisk, Yonatan},
+  title = {Synthetic and Natural Noise Both Break Neural Machine Translation},
+  booktitle = {Proc.\ ICLR},
+  year = {2018}
+}
+@inproceedings{ribeiro2020checklist,
+  author = {Ribeiro, Marco Tulio and Wu, Tongshuang and Guestrin, Carlos and Singh, Sameer},
+  title = {Beyond Accuracy: Behavioral Testing of {NLP} Models with {CheckList}},
+  booktitle = {Proc.\ ACL},
+  pages = {4902--4912},
+  year = {2020}
+}
+@article{pedregosa2011scikit,
+  author = {Pedregosa, Fabian and others},
+  title = {Scikit-learn: Machine Learning in {Python}},
+  journal = {Journal of Machine Learning Research},
+  volume = {12}, pages = {2825--2830}, year = {2011}
+}
+@article{mcnemar1947note,
+  author = {McNemar, Quinn},
+  title = {Note on the sampling error of the difference between correlated proportions or percentages},
+  journal = {Psychometrika}, volume = {12}, number = {2}, pages = {153--157}, year = {1947}
+}
+@book{efron1993bootstrap,
+  author = {Efron, Bradley and Tibshirani, Robert J.},
+  title = {An Introduction to the Bootstrap},
+  publisher = {Chapman \& Hall}, year = {1993}
+}
+@article{sparckjones1972statistical,
+  author = {Sp{\"a}rck Jones, Karen},
+  title = {A statistical interpretation of term specificity and its application in retrieval},
+  journal = {Journal of Documentation}, volume = {28}, number = {1}, pages = {11--21}, year = {1972}
+}

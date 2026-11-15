@@ -26,5 +26,11 @@
     "apko->aapko (213)",
     "ur->your (160)",
     "sala->saala (157)"
-  ]
+  ],
+  "manual_audit_counts": {
+    "preserved": 94,
+    "not_preserved": 4,
+    "unsure": 2
+  },
+  "manual_audit_n": 100
 }

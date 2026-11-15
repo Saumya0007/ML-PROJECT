@@ -1,0 +1,268 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[pagenumbers]{cvpr}
+\input{preamble}
+\usepackage{booktabs,graphicx,multirow,amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\input{gen/macros}
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+\def\confName{CVPR}
+\def\confYear{2027}
+\newcommand{\RepoURL}{https://github.com/Saumya0007/ML-PROJECT}
+
+\title{Does Spelling Normalization Help Hinglish Sentiment Analysis?\\
+Performance, Prediction Consistency and Meaning Preservation on SentiMix}
+
+\author{Saumyadip Deb\\
+IIT Jodhpur\\
+{\tt\small m26cps007@iitj.ac.in}
+\and
+Ankit Kumar\\
+IIT Jodhpur\\
+{\tt\small m26cps002@iitj.ac.in}
+\and
+Anand Kumar Sah\\
+IIT Jodhpur\\
+{\tt\small m26csa001@iitj.ac.in}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Hinglish (Hindi--English) is written in Roman script with highly variable spelling, so one word may appear as \emph{nahi}, \emph{nhi} or \emph{nahin}. We ask whether conservative, dictionary-based spelling normalization improves a sentiment classifier, and whether it does so without altering the intended sentiment. Using the official SentiMix / SemEval-2020 Task~9 Hinglish split (20{,}000 tweets) and an identical TF--IDF + logistic-regression pipeline, we compare raw and normalized text on four axes: Macro-F1/accuracy, prediction consistency under spelling variants, class-wise behaviour, and a sentiment-preservation audit. Normalization rewrites \ChangedPct\% of all sentences, yet test Macro-F1 moves only from \RawTestF{} to \NormTestF{} (difference \FDiff, 95\% CI \FDiffCI, McNemar $p{=}\McNemarP$): no significant effect. Consistency under \emph{in-dictionary} variants rises from \RobARaw\% to \RobANorm\%, but this is by construction; under out-of-dictionary synthetic noise normalization gives no gain. The reason is coverage: the rules touch only \VocabVarShare\% of tokens and shrink the vocabulary by \TypesRed\%; a small gain appears only with 10\% of the training data (\LCTenDiff{} F1). The audit finds no lost negation token, and spelling variation is not the dominant error source. All code, seeds and results are released at \url{\RepoURL}.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+Social-media text in India is heavily code-mixed: Hindi words in Roman script are interleaved with English, with no standard orthography. A single word has many spellings (\emph{acha, accha, achha}), words are shortened (\emph{bahut}$\to$\emph{bht}), and letters are elongated (\emph{nahiiii}). A sentiment classifier that relies on surface forms may therefore predict differently for two spellings of the same sentence even though the meaning is unchanged. Standard metrics (accuracy, Macro-F1) do not expose this: they score each sentence once and say nothing about equivalent variants.
+
+A natural remedy is \emph{spelling normalization}: map variants to a canonical form before classification~\cite{han2011lexical,eisenstein2013bad}. But normalization has risks: it may fail on slang, and an over-eager rule can silently change negation (\emph{nahi}, \emph{mat}) or sentiment-bearing words. We therefore evaluate normalization as an \emph{intervention} with three research questions:
+\begin{itemize}\setlength\itemsep{0pt}
+\item \textbf{RQ1} Does normalization change classification performance (Macro-F1, accuracy, per-class F1)?
+\item \textbf{RQ2} Does it make predictions more consistent across meaning-preserving spelling variants?
+\item \textbf{RQ3} Does it preserve sentiment, in particular negation?
+\end{itemize}
+\textbf{Contributions.} (i) A controlled raw-vs-normalized comparison with identical splits, features, classifier and tuning protocol; (ii) a transparent 216-entry normalization dictionary organised in rule groups, with an ablation over groups and over feature types; (iii) a consistency evaluation on two sets of spelling variants (in-dictionary and out-of-dictionary); (iv) a rule-level and sentence-level meaning-preservation audit and an error analysis. Our main finding is negative but informative: with character n-gram features, dictionary normalization neither helps nor hurts measurably.
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lp{6.2cm}@{}}
+\toprule
+RQ & Finding (details in Sec.~5)\\
+\midrule
+RQ1 & No significant change: Macro-F1 \RawTestF{} $\to$ \NormTestF{} (McNemar $p{=}\McNemarP$); no class favoured; small gain only with 10\% of the training data.\\
+RQ2 & Consistency \RobARaw\%$\to$\RobANorm\% on in-dictionary variants (by construction); no gain on out-of-dictionary noise.\\
+RQ3 & \NegLost{} negation tokens lost; 0 rule violations; flips concentrate in negation sentences in both directions.\\
+\bottomrule
+\end{tabular}
+\caption{Summary of answers to the research questions.}\label{tab:rq}
+\end{table}
+
+\section{Related Work}
+\textbf{Code-mixed sentiment.} SemEval-2020 Task~9 (SentiMix)~\cite{patwa2020semeval} provides Hinglish and Spanglish tweets with three-way sentiment labels; earlier work used sub-word compositions for Hindi--English sentiment~\cite{joshi2016subword}, and GLUECoS~\cite{khanuja2020gluecos} benchmarks code-switched NLP more broadly. Code-mixing and non-standard spelling are known difficulties for language identification~\cite{barman2014code}. Roman-script Hindi has no standard orthography, so the same word is written with different vowels, dropped vowels or elongations depending on the writer and region; SentiMix text additionally contains hashtags, user mentions, emoji and English slang, which makes the vocabulary long-tailed.\\
+\textbf{Normalization.} Text normalization for noisy text spans non-standard-word handling~\cite{sproat2001normalization}, lexical normalization of tweets~\cite{han2011lexical}, and the debate on whether to normalize or to adapt models~\cite{eisenstein2013bad}. Dictionary approaches are transparent and cheap but cover only listed forms, while learned normalizers generalise at the cost of opacity and possible meaning drift. We study the simplest variant, a hand-audited dictionary, because its effect on sentiment can be inspected rule by rule, and we deliberately pair it with a model (character n-grams) that is already tolerant to spelling noise, which makes the benefit of normalization a non-trivial question.\\
+\textbf{Robustness evaluation.} Models can be brittle to character-level noise~\cite{belinkov2018synthetic}, and behavioural testing~\cite{ribeiro2020checklist} evaluates invariance to meaning-preserving perturbations. Our consistency metric follows this invariance-testing idea.
+
+\section{Dataset and Preprocessing}
+\label{sec:data}
+We use the Hinglish track of SentiMix / SemEval-2020 Task~9~\cite{patwa2020semeval} with the \emph{official} splits (Table~\ref{tab:data}): 14{,}000 train, 3{,}000 dev and 3{,}000 test tweets labelled negative, neutral or positive (neutral is the largest class, 37.5\%). Files are in CoNLL style (one token per line); we rebuild each sentence from its token lines and join the separately distributed test labels by \texttt{uid}. We verified that no \texttt{uid} occurs in two splits.
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_data}
+\caption{SentiMix Hinglish class distribution per split.}\label{tab:data}
+\end{table}
+
+\textbf{Cleaning (both conditions).} Text is lowercased; URLs (split into tokens in this corpus) and \texttt{@user} mentions are replaced by placeholders. Emoji and punctuation are kept. A few training lines are noisy (e.g.\ non-Hinglish text with language tags); we keep them. This cleaning is identical for the raw and normalized conditions, so only the spelling rules differ.
+
+\textbf{Leakage control.} Spelling variants used for the robustness test (Sec.~\ref{sec:robust}) are generated only from test sentences and are never used for training or tuning; all variants of one source sentence therefore stay in the test split.
+
+\section{Method}
+\label{sec:method}
+\begin{figure}[t]\centering
+\begin{tikzpicture}[font=\scriptsize,>=Stealth,box/.style={draw,rounded corners=2pt,align=center,inner sep=2.5pt,minimum height=7mm}]
+\node[box] (d) at (0,0) {SentiMix\\train/dev/test};
+\node[box] (m) at (2.05,0) {mask URL, @user\\lowercase};
+\node[box] (a) at (4.35,0.6) {Path A: raw};
+\node[box] (b) at (4.35,-0.6) {Path B: normalizer};
+\node[box] (c) at (6.75,0) {TF--IDF\\word + char\\$\to$ LR};
+\node[box] (e) at (4.35,-1.75) {Macro-F1, accuracy, consistency,\\class-wise, preservation audit};
+\draw[->] (d)--(m); \draw[->] (m.east)--(a.west); \draw[->] (m.east)--(b.west);
+\draw[->] (a.east)--(c.west); \draw[->] (b.east)--(c.west); \draw[->] (c.south)|-(e.east);
+\end{tikzpicture}
+\caption{Controlled comparison: both paths share splits, masking, features, classifier and tuning; only the normalizer differs.}\label{fig:pipe}
+\end{figure}
+
+\textbf{Classifier.} Features are the union of word 1--2-gram TF--IDF~\cite{sparckjones1972statistical} (min\_df\,2, sublinear tf) and character 2--4-gram TF--IDF (\texttt{char\_wb}, min\_df\,3, $\le$150k features), fitted on train only. The classifier is multinomial L2-regularised logistic regression (scikit-learn~\cite{pedregosa2011scikit}, L-BFGS, \texttt{random\_state}=42). The inverse regularisation strength $C\in\{0.1,0.25,0.5,1,2\}$ is selected by dev Macro-F1 \emph{separately for each condition}; the model is then refit with that $C$ and evaluated once on test.
+
+\textbf{Normalizer.} A token-level lookup maps spelling variants to one canonical form. Rules are organised in groups: \emph{negation} (\GrpNeg{} variants, e.g.\ \emph{nhi, nahin}$\to$\emph{nahi}), \emph{spelling} (\GrpSpell, e.g.\ \emph{acha, achha, accha}), \emph{abbreviation} (\GrpAbbr, vowel-dropped forms such as \emph{bht, kr, rha}), \emph{English slang} (\GrpSlang, e.g.\ \emph{plz, u, gud}) and \emph{elongation} (runs of $\ge3$ identical letters collapsed to two). Variants were mined from the training split by consonant-skeleton grouping and then reviewed by hand. Design rules: (a) conservative---only forms that almost always denote the same word; (b) negation words map only to negation words (checked automatically); (c) ambiguous forms are \emph{excluded}: \emph{na, ni, nai} (negation vs.\ other senses), \emph{ache} (English \emph{ache} vs.\ Hindi \emph{achhe}), \emph{kia} (\emph{kiya} vs.\ \emph{kya}), \emph{bs, hm, tm, m, s}, etc. Context inspection removed two candidate rules: \emph{ky} is Urdu \emph{ke}, not \emph{kya}, and \emph{shi} occurs in \emph{jai shi ram}.
+
+\textbf{Procedure.} For each condition: (1)~mask and lowercase every sentence; (2)~[Path B only] split into alphabetic tokens, collapse runs of $\ge3$ identical letters, and replace each token found in the lookup by its canonical form, leaving all other characters untouched; (3)~fit the vectorizers on the training split, tune $C$ on dev, refit, predict test; (4)~store predictions and a checkpoint. Because the rewrite is a pure token-level substitution, the number and order of tokens never change, which makes the audit in Sec.~\ref{sec:audit} a simple token comparison.
+
+\textbf{Metrics.} \emph{Macro-F1} (primary) and accuracy. \emph{Consistency}: for a pipeline $f$, original sentence $x$ and its variants $\mathcal V(x)$,
+\begin{equation}
+\mathrm{Cons}=\frac{1}{\sum_x|\mathcal V(x)|}\sum_{x}\sum_{v\in\mathcal V(x)}\mathbb 1\!\left[f(v)=f(x)\right],
+\end{equation}
+where $f$ includes the normalizer for Path B. \emph{Preservation}: a rule-level and sentence-level audit (Sec.~\ref{sec:audit}). Paired differences are tested with McNemar's test~\cite{mcnemar1947note} and a paired bootstrap~\cite{efron1993bootstrap} (2{,}000 resamples, seed 42).
+
+\section{Experiments}
+\subsection{Main comparison (RQ1)}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_main}
+\caption{Raw vs.\ normalized text (word + char features). $C$ chosen on dev.}\label{tab:main}
+\end{table}
+Table~\ref{tab:main} shows that normalization changes test Macro-F1 by \FDiff{} (bootstrap 95\% CI \FDiffCI) even though it rewrites \ChangedTest{} of the 3{,}000 test sentences. Of the 3{,}000 test predictions, \PredChanged{} change: \FOnlyNorm{} sentences become correct and \FOnlyRaw{} become wrong (McNemar $p{=}\McNemarP$). Dev favours normalization slightly (\RawDevF{} vs.\ \NormDevF) and so does test (\RawTestF{} vs.\ \NormTestF), but both gaps are within sampling noise; we conclude there is \emph{no detectable effect}. Test scores exceed dev scores for both conditions, as is common for this dataset; $C$ was tuned on dev only.
+
+\textbf{Setup and sensitivity.} Everything runs on CPU (about 45\,s for both conditions). Table~\ref{tab:cdev} shows dev Macro-F1 over $C$: both conditions are flat for $C\in[0.1,1]$ (spread $\le$0.006), so the different selected values (\RawC{} vs.\ \NormC) reflect small dev differences rather than a different operating regime. scikit-learn's default word tokenizer discards one-character tokens, so rules such as \emph{h}$\to$\emph{hai} and \emph{u}$\to$\emph{you} also \emph{add} word features that the raw word-level model cannot see (the char n-grams still do); this is part of the intervention.
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_cdev}
+\caption{Dev Macro-F1 for each inverse regularisation strength $C$.}\label{tab:cdev}
+\end{table}
+
+\subsection{Why so little effect? Coverage}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_vocab}
+\caption{Vocabulary effect of normalization (train split, test OOV).}\label{tab:vocab}
+\end{table}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\input{gen/tab_groups}
+\caption{Rule groups: number of variant forms and number of sentences (all splits) changed by each group alone.}\label{tab:groups}
+\end{table}
+Table~\ref{tab:vocab} gives a mechanistic reason. Tokens covered by a rule are only \VocabVarShare\% of the training tokens. Normalization shrinks the training vocabulary by just \TypesRed\% (\TypesRedTwo\% for types with df$\ge$2) and lowers the test out-of-vocabulary rate from \OOVRaw\% to \OOVNorm\%. Most unseen test tokens are names, hashtags, rare words and unlisted spellings that a conservative dictionary cannot cover. Although \ChangedPct\% of sentences contain at least one rewritten token (Table~\ref{tab:groups}), a typical rewrite is small (about \TokPerChanged{} tokens), so the feature space changes little.
+
+\subsection{Ablation (RQ1)}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_ablation}
+\caption{Ablation. ``only $g$'': a single rule group; ``$-g$'': all groups except $g$. $C$ tuned on dev per row.}\label{tab:abl}
+\end{table}
+Table~\ref{tab:abl} compares rule groups and feature types. With word+char features every configuration lies between \AblMinF{} and \AblMaxF{} test Macro-F1, within the bootstrap uncertainty of the main comparison ($\approx\pm0.009$), so we cannot attribute a benefit or harm to any single group. Removing character n-grams lowers all scores by about 0.02, and normalization changes the word-only model from \WordRawF{} to \WordNormF{} Macro-F1 (accuracy \WordRawAcc{}$\to$\WordNormAcc). This difference is slightly larger than with char n-grams but of similar size as the noise level; it is consistent with, but does not prove, the hypothesis that character n-grams already absorb much spelling variation.
+
+\subsection{Data efficiency (RQ1)}
+If normalization mainly pools sparse variants, it should help most when training data is scarce. We train on random subsets (3 seeds; $C{=}0.5$ for both conditions) and evaluate on the full test set (Table~\ref{tab:lc}). With 10\% of the training data (1{,}400 tweets) normalization gains \LCTenDiff{} Macro-F1 and is ahead in \LCTenPos{} seeds; at 25\%, 50\% and 100\% the gain shrinks to \LCQuarterDiff, \LCHalfDiff{} and \LCFullDiff, below the uncertainty of the full-data comparison. This supports the pooling explanation, but with three seeds the low-resource result is indicative rather than conclusive.
+\begin{figure}[t]\centering
+\includegraphics[width=0.8\linewidth]{../results/learning_curve.png}
+\caption{Test Macro-F1 vs.\ amount of training data (mean$\pm$sd over 3 seeds).}\label{fig:lc}
+\end{figure}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\input{gen/tab_lc}
+\caption{Test Macro-F1 vs.\ training-set size (mean over seeds; $\Delta$=normalized$-$raw).}\label{tab:lc}
+\end{table}
+
+\subsection{Prediction consistency (RQ2)}
+\label{sec:robust}
+We build two variant sets from \emph{test} sentences. \textbf{Set A (attested swap)}: tokens belonging to a known spelling family are replaced by another family member (e.g.\ \emph{nahi}$\to$\emph{nhi}); up to three variants per sentence. Because the normalizer is built from the same families, A is an optimistic, in-dictionary upper bound. \textbf{Set B (synthetic noise)}: each word of length $\ge4$ is perturbed with probability $p$ by one of: drop an inner vowel, double a vowel, elongate the last letter, or a vowel-pair / \emph{v}$\leftrightarrow$\emph{w} / \emph{ph}$\leftrightarrow$\emph{f} substitution; three variants per sentence, $p\in\{0.1,0.2,0.3,0.5\}$. Most B variants are not in the dictionary. Variant generation is deterministic given the seed: for each test sentence and each of three draws, every eligible word is perturbed independently; draws that leave the sentence unchanged are discarded, which is why the number of variants is below three per sentence (Table~\ref{tab:rob}). A sample of 60 variants per set is stored for manual meaning checks (App.~\ref{app:var}). We evaluate the already-trained models (no retraining) and report consistency (Eq.~1) with a paired-bootstrap CI for the gain.
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\input{gen/tab_robust}
+\caption{Prediction consistency (\%) of raw vs.\ normalized pipelines under spelling variants. Gain in percentage points.}\label{tab:rob}
+\end{table}
+\begin{figure}[t]\centering
+\includegraphics[width=0.78\linewidth]{../results/robustness_curve.png}
+\caption{Consistency vs.\ noise level (Set B).}\label{fig:rob}
+\end{figure}
+Table~\ref{tab:rob} and Fig.~\ref{fig:rob} give two clear patterns. On Set~A, normalization raises consistency from \RobARaw\% to \RobANorm\% (gain \RobAGain{} points, CI \RobACI), and Macro-F1 on the variants from \RobAFRaw{} to \RobAFNorm; the 100\% is expected, since every Set-A variant maps back to the same normalized string. On Set~B, where noise is mostly outside the dictionary, there is no benefit: at $p{=}0.1$ the normalized pipeline is slightly \emph{less} consistent (\RobBAGain{} points, CI \RobBACI), and at $p\ge0.2$ differences are not distinguishable from zero. Breaking Set~A down by variant type, the raw model is less consistent when a \emph{negation} spelling changes (\RobANegRaw\% over \RobANegN{} variants) than for other families (\RobAOthRaw\% over \RobAOthN), the one place where spelling variation plausibly threatens sentiment; the normalizer removes this gap for listed variants. For Set~B, plausible explanations (not tested here) are: the raw model has learned in-vocabulary variant spellings as separate features, while normalization cannot recognise unseen noise; and character n-grams give both models similar tolerance. Both pipelines lose consistency steadily as noise grows (from about \RobBARaw\% to \RobBDRaw\% for raw).
+
+\subsection{Class-wise analysis (RQ1)}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_classwise}
+\caption{Per-class precision, recall and F1 on test.}\label{tab:cw}
+\end{table}
+Table~\ref{tab:cw} reports per-class results. Changes in F1 are tiny and of mixed sign (negative \DNeg, neutral \DNeu, positive \DPos), so normalization does not favour one sentiment class. Neutral is the hardest class under both conditions, and \ShareNeutralPred\% of raw errors are predictions of ``neutral''. Figure~\ref{fig:cw} visualises the F1 changes. Table~\ref{tab:conf} shows that the dominant confusions are between neutral and the polar classes under both conditions. This is class-wise analysis only, not a demographic fairness audit.
+\begin{figure}[t]\centering
+\includegraphics[width=0.78\linewidth]{../results/classwise_f1.png}
+\caption{Class-wise test F1, raw vs.\ normalized.}\label{fig:cw}
+\end{figure}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\input{gen/tab_confusion}
+\caption{Confusion matrices on test (rows: gold).}\label{tab:conf}
+\end{table}
+
+\subsection{Sentiment-preservation audit (RQ3)}
+\label{sec:audit}
+\textbf{Rule level.} All \RulesTotal{} rules were checked automatically for negation compatibility (a negation token may only map to a negation token): 0 violations; \RulesObserved{} rules actually occur in the corpus. \textbf{Sentence level.} Normalization changes \ChangedAll{} of 20{,}000 sentences (\ChangedPct\%), on average \TokPerChanged{} tokens per changed sentence. The largest groups are spelling (\ChgSpelling{} sentences), abbreviation (\ChgAbbreviation) and English slang (\ChgEnglishSlang). The number of negation tokens is \emph{never lost} (\NegLost{} sentences) and increases in \NegRecovered{} sentences where an elongated negation (e.g.\ \emph{nahiii}) is recovered. These checks are partly guaranteed by construction; they verify the invariant, not semantic adequacy. \textbf{Manual sample.} We drew 100 changed test sentences (\texttt{results/audit\_sample.csv}) and one author labeled each as \emph{preserved}, \emph{not preserved} or \emph{unsure} (\texttt{results/audit\_sample\_labeled.csv}). \ManualAudit{} (94\%; 95\% Wilson CI [87.5\%, 97.2\%]), 4 were not preserved and 2 unsure. Of the sample, 42 sentences contain a negation token, and none of the six flagged cases changed a negation or the sentence polarity. The four \emph{not preserved} cases are word-level errors from ambiguous surface forms, not sentiment shifts: \emph{rha} in an English acronym was rewritten to \emph{raha}; \emph{sala} (``years old'') to \emph{saala} (an insult); and \emph{hn}, which here stands for \emph{hain} or \emph{hun}, to \emph{haan} (``yes'') in two sentences. The two \emph{unsure} cases involve \emph{u} and \emph{hun} that look like fragments of user handles. These show the main risk of context-free dictionary rules, namely homographs; the \emph{hn$\to$haan} rule is the most error-prone. The audit used a single labeler without inter-annotator agreement, so it is indicative only. The audit's main practical value was in rule design: reading rules in context removed \emph{ky} and \emph{shi} and motivated excluding \emph{ache}.
+
+\subsection{Error analysis}\label{sec:err}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_errors}
+\caption{Primary category of raw-model test errors (priority: spelling $>$ slang $>$ negation $>$ other).}\label{tab:err}
+\end{table}
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_subsets}
+\caption{Macro-F1 on test subsets (categories overlap).}\label{tab:sub}
+\end{table}
+We group the \ErrRaw{} raw-model errors (Table~\ref{tab:err}). The largest category, \CatOther{} errors, has no surface cue (context, sarcasm, neutral-vs-polar ambiguity); \CatSpell{} errors involve a spelling variant, \CatSlang{} slang/abbreviation or elongation, and \CatNeg{} negation. Spelling variation is not the dominant error source: the error rate is \ErrSpellWith\% for sentences with a variant token versus \ErrSpellWithout\% without (\ErrSlangWith\% vs.\ \ErrSlangWithout\% for slang). Negation sentences are harder (\ErrNegWith\% vs.\ \ErrNegWithout\%). \textbf{What does rewriting actually change?} The two models differ for two reasons: the rewritten text, and the fact that each is retrained (with its own $C$). We therefore separate the \ChangedTest{} rewritten test sentences from the \UnchN{} untouched ones. Among untouched sentences \FlipUnchPct\% of predictions (\FlipsUnch) still flip, which is pure retraining churn; refitting the raw pipeline with $C{=}0.5$ instead of the selected value flips \ChurnRefPct\% of all test predictions. Among rewritten sentences \FlipChgPct\% (\FlipsChg) flip: \FixedChg{} become correct and \BrokenChg{} become wrong (net \NetChg), so the excess flip rate attributable to rewriting is only about two points. Flips are over-represented in sentences with negation (\FlipNegShare\% of flips vs.\ \NegChgShare\% of rewritten sentences) but in both directions (\FixedChgNeg{} fixed vs.\ \BrokenChgNeg{} broken), which points to higher volatility of negation sentences rather than systematic harm from the rules; with such small counts we cannot exclude subtle effects. Table~\ref{tab:ex} shows examples. On the subset changed by rules, Macro-F1 is \SubChgRaw{} (raw) vs.\ \SubChgNorm{} (normalized); on unchanged sentences \SubUnchRaw{} vs.\ \SubUnchNorm{} (Table~\ref{tab:sub}).
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\input{gen/tab_examples}
+\caption{Test sentences whose prediction changed after rewriting (excerpts; offensive items omitted; @u = user mention).}\label{tab:ex}
+\end{table}
+
+\section{Discussion and Limitations}
+Why does normalization not help? (1)~Coverage: the dictionary touches only \VocabVarShare\% of tokens and barely reduces OOV; (2)~character n-grams already generalise across close spellings; (3)~at corpus scale the common variants appear in training, so the model learns them directly (the pooling benefit shows only with 10\% of the data); (4)~most test errors are not spelling-related. Normalization is nevertheless useful as a \emph{guarantee}: in-dictionary variants receive identical predictions. \textbf{Limitations.} One dataset (tweets) and one classical classifier family; no transformer baselines. The dictionary is hand-built for this corpus, so Set~A is optimistic and Set~B's meaning preservation is assumed from the perturbation types (a 60-sentence sample is provided for checking). Hyper-parameters were tuned per condition on dev only. Differences below $\approx$0.01 Macro-F1 are within bootstrap noise. The manual audit is small and, as a sample, cannot prove the absence of sentiment shifts. A stronger study would use human-written variants and larger code-mixed models.
+
+\textbf{Threats to validity.} \emph{Internal:} the raw and normalized models are separate fits, so some prediction churn is unrelated to the rewrite (quantified in Sec.~\ref{sec:err}). \emph{Construct:} consistency measures invariance, not correctness; a pipeline that always predicts one class would be perfectly consistent. We therefore always report it next to Macro-F1 on the variants. \emph{External:} results may differ for other genres, other code-mixed pairs, or neural encoders with sub-word vocabularies. \textbf{Ethics.} The data are public tweets that contain abusive language. We mask user mentions, report no user identifiers, and omit offensive excerpts from the report.
+
+\section{Conclusion}
+A transparent 216-rule Hinglish spelling normalizer rewrites \ChangedPct\% of SentiMix sentences but does not significantly change TF--IDF + logistic-regression performance (Macro-F1 \RawTestF{} vs.\ \NormTestF{}), does not favour any class, preserves negation tokens by construction, and improves consistency only for in-dictionary variants. The rules cover just \VocabVarShare\% of tokens; the one setting where they help visibly is very low-resource training (10\% of the data, \LCTenDiff{} Macro-F1). Practitioners should therefore not expect accuracy gains from dictionary normalization when character n-grams are used, but may adopt it for deterministic handling of known variants.
+
+\textbf{Practical guidance.} (i)~Do not rely on dictionary normalization for accuracy when character n-grams are available; (ii)~use it when deterministic handling of known variants or negation spellings matters, or when training data are very scarce; (iii)~always check candidate rules in context (two of our candidates were wrong) and keep ambiguous forms out; (iv)~report consistency next to Macro-F1, and compare against a retraining-churn reference before attributing prediction changes to the intervention.
+
+\section*{Reproducibility Statement}
+\textbf{Declaration.} All numbers, tables and figures in this report are produced by the scripts in the accompanying repository; no number was edited by hand. Experiments are CPU-only, deterministic (fixed seed 42, official splits, L-BFGS solver; \texttt{PYTHONHASHSEED}=0), and run in about 15 minutes on a laptop. Library versions are pinned in \texttt{requirements-lock.txt} (Python 3.12, scikit-learn 1.9.1, pandas 3.0.6, numpy 2.5.4). Datasets are \emph{not} included; they are public at Zenodo (record 3974927) and instructions are in \texttt{data/README.md}. Trained models (about 2\,MB each) are in \texttt{checkpoints/}. \textbf{To reproduce:} \texttt{pip install -r requirements.txt}; place the four data files in \texttt{data/}; run \texttt{python run\_all.py}; then compile \texttt{report/main.tex}. The repository is at \url{\RepoURL}. Commit hashes and timestamps are in Table~\ref{tab:commits}.
+
+{\small\bibliographystyle{ieeenat_fullname}\bibliography{refs}}
+
+\appendix
+\section{Appendix}
+\begin{table}[h]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_commits}
+\caption{Repository commit history (hash, timestamp, message), generated by \texttt{src/commit\_log.py}.}\label{tab:commits}
+\end{table}
+\begin{table}[h]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_audit}
+\caption{Audit statistics (all numbers from \texttt{results/audit.json}).}\label{tab:audit}
+\end{table}
+\begin{table}[h]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lp{5.6cm}@{}}
+\toprule
+Form & Why it is \emph{not} normalized\\
+\midrule
+\emph{na, ni, nai} & negation vs.\ tag particle / \emph{nayi} (``new'')\\
+\emph{mat, mt} & imperative ``don't'' vs.\ other uses; kept as is\\
+\emph{ache} & English \emph{ache} (pain) vs.\ \emph{achhe} (good)\\
+\emph{kia} & \emph{kiya} vs.\ \emph{kya} vs.\ brand name\\
+\emph{ky} & Urdu \emph{ke} (found in data), not \emph{kya}\\
+\emph{shi} & \emph{jai shi ram} (found in data), not \emph{sahi}\\
+\emph{bs, hm, tm} & \emph{bas}/BS, \emph{hum}/``hmm'', \emph{tum}/trademark\\
+\emph{m, s, t} & fragments of English contractions (I'm, it's)\\
+\emph{sale, km} & English \emph{sale} vs.\ \emph{saale}; \emph{km} = kilometres\\
+\bottomrule
+\end{tabular}
+\caption{Ambiguous forms deliberately left unchanged (documented in \texttt{normalize.py}).}\label{tab:excl}
+\end{table}
+\begin{table}[h]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\input{gen/tab_rules}
+\caption{Most frequent normalization rules (frequency over all splits). Full list: \texttt{results/rule\_audit.csv}.}\label{tab:rules}
+\end{table}
+\begin{table}[h]\centering\footnotesize
+\input{gen/tab_variants}
+\caption{Examples of generated variants (A: attested swap; B: synthetic noise, $p{=}0.3$).}\label{tab:variants}
+\end{table}
+\label{app:var}
+\begin{table}[h]\centering\footnotesize
+\begin{tabular}{@{}lp{4.4cm}@{}}
+\toprule
+Path & Purpose\\
+\midrule
+\texttt{src/load\_data.py} & parse CoNLL, join test labels, masking, features\\
+\texttt{src/normalize.py} & rule groups + self-check\\
+\texttt{src/baseline.py} & raw vs.\ normalized, checkpoints\\
+\texttt{src/ablation.py} & rule-group / word-only ablation\\
+\texttt{src/learning\_curve.py} & data-efficiency experiment\\
+\texttt{src/robustness.py} & variant sets, consistency\\
+\texttt{src/audit.py} & rule/sentence audit, manual sample\\
+\texttt{src/analysis.py} & class-wise and error analysis\\
+\texttt{src/vocab\_stats.py} & vocabulary / OOV statistics\\
+\texttt{src/significance.py} & McNemar, bootstrap\\
+\texttt{run\_all.py} & runs everything in order\\
+\bottomrule
+\end{tabular}
+\caption{Repository map (code).}\label{tab:repo}
+\end{table}
+\end{document}

@@ -1,0 +1,28 @@
+\begin{tabular}{lccc}
+\toprule
+Configuration & Dev F1 & Test F1 & Test Acc\\
+\midrule
+\multicolumn{4}{l}{\emph{Word + char n-grams}}\\
+Raw (no rules) & 0.625 & 0.686 & 0.681\\
+\quad only Negation & 0.627 & 0.687 & 0.682\\
+\quad only Spelling & 0.629 & 0.681 & 0.676\\
+\quad only Abbreviation & 0.626 & 0.684 & 0.679\\
+\quad only English slang & 0.626 & 0.686 & 0.681\\
+\quad only Elongation & 0.626 & 0.688 & 0.683\\
+All groups & 0.631 & 0.688 & 0.683\\
+\quad $-$ Negation & 0.628 & 0.687 & 0.682\\
+\quad $-$ Spelling & 0.630 & 0.682 & 0.677\\
+\quad $-$ Abbreviation & 0.630 & 0.691 & 0.685\\
+\quad $-$ English slang & 0.629 & 0.684 & 0.679\\
+\quad $-$ Elongation & 0.630 & 0.686 & 0.681\\
+\midrule
+\multicolumn{4}{l}{\emph{Word n-grams only}}\\
+Raw (no rules) & 0.616 & 0.667 & 0.662\\
+\quad only Negation & 0.615 & 0.665 & 0.660\\
+\quad only Spelling & 0.616 & 0.666 & 0.661\\
+\quad only Abbreviation & 0.618 & 0.664 & 0.659\\
+\quad only English slang & 0.620 & 0.664 & 0.660\\
+\quad only Elongation & 0.615 & 0.663 & 0.658\\
+All groups & 0.621 & 0.672 & 0.667\\
+\bottomrule
+\end{tabular}
