@@ -151,6 +151,22 @@ Table~\ref{tab:vocab} gives a mechanistic reason. Tokens covered by a rule are o
 \end{table}
 Table~\ref{tab:abl} compares rule groups and feature types. With word+char features every configuration lies between \AblMinF{} and \AblMaxF{} test Macro-F1, within the bootstrap uncertainty of the main comparison ($\approx\pm0.009$), so we cannot attribute a benefit or harm to any single group. Removing character n-grams lowers all scores by about 0.02, and normalization changes the word-only model from \WordRawF{} to \WordNormF{} Macro-F1 (accuracy \WordRawAcc{}$\to$\WordNormAcc). This difference is slightly larger than with char n-grams but of similar size as the noise level; it is consistent with, but does not prove, the hypothesis that character n-grams already absorb much spelling variation.
 
+\subsection{Other classifiers (RQ1)}
+To check that the conclusion is not specific to logistic regression, we repeated the raw-vs-normalized comparison with three other classifiers on the same word+char features and the same protocol (hyper-parameter chosen on dev, test evaluated once; \texttt{src/othermodels.py}): LinearSVC, Complement Naive Bayes and SGD with modified-Huber loss. The Macro-F1 differences ($-$0.0002, $-$0.0003, $+$0.0049) are of the same size as the bootstrap noise of the main comparison and have no consistent sign, so normalization again gives no reliable gain (Table~\ref{tab:othermodels}). Logistic regression was fixed as the main model beforehand; these runs are a robustness check, not a model search.
+\begin{table}[t]\centering\footnotesize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Classifier & Raw & Norm. & $\Delta$\\
+\midrule
+Logistic Reg. (main) & .6865 & .6877 & $+$.0012\\
+LinearSVC & .6920 & .6918 & $-$.0002\\
+ComplementNB & .6258 & .6255 & $-$.0003\\
+SGD (mod.\ Huber) & .6473 & .6522 & $+$.0049\\
+\bottomrule
+\end{tabular}
+\caption{Test Macro-F1 of other classifiers, raw vs.\ normalized text.}\label{tab:othermodels}
+\end{table}
+
 \subsection{Data efficiency (RQ1)}
 If normalization mainly pools sparse variants, it should help most when training data is scarce. We train on random subsets (3 seeds; $C{=}0.5$ for both conditions) and evaluate on the full test set (Table~\ref{tab:lc}). With 10\% of the training data (1{,}400 tweets) normalization gains \LCTenDiff{} Macro-F1 and is ahead in \LCTenPos{} seeds; at 25\%, 50\% and 100\% the gain shrinks to \LCQuarterDiff, \LCHalfDiff{} and \LCFullDiff, below the uncertainty of the full-data comparison. This supports the pooling explanation, but with three seeds the low-resource result is indicative rather than conclusive.
 \begin{figure}[t]\centering
@@ -210,7 +226,7 @@ We group the \ErrRaw{} raw-model errors (Table~\ref{tab:err}). The largest categ
 \end{table}
 
 \section{Discussion and Limitations}
-Why does normalization not help? (1)~Coverage: the dictionary touches only \VocabVarShare\% of tokens and barely reduces OOV; (2)~character n-grams already generalise across close spellings; (3)~at corpus scale the common variants appear in training, so the model learns them directly (the pooling benefit shows only with 10\% of the data); (4)~most test errors are not spelling-related. Normalization is nevertheless useful as a \emph{guarantee}: in-dictionary variants receive identical predictions. \textbf{Limitations.} One dataset (tweets) and one classical classifier family; no transformer baselines. The dictionary is hand-built for this corpus, so Set~A is optimistic and Set~B's meaning preservation is assumed from the perturbation types (a 60-sentence sample is provided for checking). Hyper-parameters were tuned per condition on dev only. Differences below $\approx$0.01 Macro-F1 are within bootstrap noise. The manual audit is small and, as a sample, cannot prove the absence of sentiment shifts. A stronger study would use human-written variants and larger code-mixed models.
+Why does normalization not help? (1)~Coverage: the dictionary touches only \VocabVarShare\% of tokens and barely reduces OOV; (2)~character n-grams already generalise across close spellings; (3)~at corpus scale the common variants appear in training, so the model learns them directly (the pooling benefit shows only with 10\% of the data); (4)~most test errors are not spelling-related. Normalization is nevertheless useful as a \emph{guarantee}: in-dictionary variants receive identical predictions. \textbf{Limitations.} One dataset (tweets) and classical linear/NB classifiers only; no transformer baselines. The dictionary is hand-built for this corpus, so Set~A is optimistic and Set~B's meaning preservation is assumed from the perturbation types (a 60-sentence sample is provided for checking). Hyper-parameters were tuned per condition on dev only. Differences below $\approx$0.01 Macro-F1 are within bootstrap noise. The manual audit is small and, as a sample, cannot prove the absence of sentiment shifts. A stronger study would use human-written variants and larger code-mixed models.
 
 \textbf{Threats to validity.} \emph{Internal:} the raw and normalized models are separate fits, so some prediction churn is unrelated to the rewrite (quantified in Sec.~\ref{sec:err}). \emph{Construct:} consistency measures invariance, not correctness; a pipeline that always predicts one class would be perfectly consistent. We therefore always report it next to Macro-F1 on the variants. \emph{External:} results may differ for other genres, other code-mixed pairs, or neural encoders with sub-word vocabularies. \textbf{Ethics.} The data are public tweets that contain abusive language. We mask user mentions, report no user identifiers, and omit offensive excerpts from the report.
 
@@ -261,24 +277,4 @@ Form & Why it is \emph{not} normalized\\
 \caption{Examples of generated variants (A: attested swap; B: synthetic noise, $p{=}0.3$).}\label{tab:variants}
 \end{table}
 \label{app:var}
-\begin{table}[h]\centering\footnotesize
-\begin{tabular}{@{}lp{4.4cm}@{}}
-\toprule
-Path & Purpose\\
-\midrule
-\texttt{src/load\_data.py} & parse CoNLL, join test labels, masking, features\\
-\texttt{src/normalize.py} & rule groups + self-check\\
-\texttt{src/baseline.py} & raw vs.\ normalized, checkpoints\\
-\texttt{src/ablation.py} & rule-group / word-only ablation\\
-\texttt{src/learning\_curve.py} & data-efficiency experiment\\
-\texttt{src/robustness.py} & variant sets, consistency\\
-\texttt{src/audit.py} & rule/sentence audit, manual sample\\
-\texttt{src/analysis.py} & class-wise and error analysis\\
-\texttt{src/vocab\_stats.py} & vocabulary / OOV statistics\\
-\texttt{src/significance.py} & McNemar, bootstrap\\
-\texttt{run\_all.py} & runs everything in order\\
-\bottomrule
-\end{tabular}
-\caption{Repository map (code).}\label{tab:repo}
-\end{table}
 \end{document}
