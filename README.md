@@ -34,7 +34,8 @@ report/        main.tex, main.pdf, gen/ (auto-generated tables)
 ```bash
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
-pip install -r requirements-lock.txt   # exact versions; requirements.txt = minimum versions
+pip install -r requirements-lock.txt   # exact versions of the verification run (Python 3.12.3)
+# or: pip install -r requirements.txt  # minimum versions
 ```
 
 ## Data
@@ -61,7 +62,9 @@ cd report && pdflatex main && bibtex main && pdflatex main && pdflatex main
 python src/commit_log.py        # writes results/commit_log.txt and report/gen/tab_commits.tex
 git log --pretty=format:"%h | %ad | %s" --date=iso
 ```
-The commit table in the report (Table 15) is generated from this.
+The commit table in the report (Table 15) is generated from this. A commit cannot contain its own
+hash, so the table lists every commit up to the one before the final "update commit log" commit;
+the complete history is on GitHub (https://github.com/Saumya0007/ML-PROJECT/commits).
 
 ## Checkpoints
 `checkpoints/*.joblib` hold the fitted TF-IDF vectorizers and logistic-regression models

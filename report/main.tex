@@ -1,7 +1,7 @@
 \documentclass[10pt,twocolumn,letterpaper]{article}
 \usepackage[pagenumbers]{cvpr}
 \input{preamble}
-\usepackage{booktabs,graphicx,multirow,amsmath}
+\usepackage{booktabs,graphicx,multirow,amsmath,array}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta}
 \input{gen/macros}
@@ -58,10 +58,26 @@ RQ3 & \NegLost{} negation tokens lost; 0 rule violations; flips concentrate in n
 \caption{Summary of answers to the research questions.}\label{tab:rq}
 \end{table}
 
-\section{Related Work}
-\textbf{Code-mixed sentiment.} SemEval-2020 Task~9 (SentiMix)~\cite{patwa2020semeval} provides Hinglish and Spanglish tweets with three-way sentiment labels; earlier work used sub-word compositions for Hindi--English sentiment~\cite{joshi2016subword}, and GLUECoS~\cite{khanuja2020gluecos} benchmarks code-switched NLP more broadly. Code-mixing and non-standard spelling are known difficulties for language identification~\cite{barman2014code}. Roman-script Hindi has no standard orthography, so the same word is written with different vowels, dropped vowels or elongations depending on the writer and region; SentiMix text additionally contains hashtags, user mentions, emoji and English slang, which makes the vocabulary long-tailed.\\
-\textbf{Normalization.} Text normalization for noisy text spans non-standard-word handling~\cite{sproat2001normalization}, lexical normalization of tweets~\cite{han2011lexical}, and the debate on whether to normalize or to adapt models~\cite{eisenstein2013bad}. Dictionary approaches are transparent and cheap but cover only listed forms, while learned normalizers generalise at the cost of opacity and possible meaning drift. We study the simplest variant, a hand-audited dictionary, because its effect on sentiment can be inspected rule by rule, and we deliberately pair it with a model (character n-grams) that is already tolerant to spelling noise, which makes the benefit of normalization a non-trivial question.\\
-\textbf{Robustness evaluation.} Models can be brittle to character-level noise~\cite{belinkov2018synthetic}, and behavioural testing~\cite{ribeiro2020checklist} evaluates invariance to meaning-preserving perturbations. Our consistency metric follows this invariance-testing idea.
+\section{Literature Review}
+\label{sec:lit}
+\textbf{Code-mixed sentiment.} Early Hindi--English work combined lexicons with text normalization~\cite{sharma2015text}; Joshi et al.~\cite{joshi2016subword} instead learned sub-word (character n-gram) compositions and left spelling untouched. SemEval-2020 Task~9 (SentiMix)~\cite{patwa2020semeval} standardised evaluation on Hinglish and Spanglish tweets, and GLUECoS~\cite{khanuja2020gluecos} benchmarks code-switched NLP more broadly; multilingual encoders such as XLM-R~\cite{conneau2020unsupervised} and MuRIL~\cite{khanuja2021muril} are now common. Code-mixing and non-standard spelling are known difficulties for language identification~\cite{barman2014code}. Roman-script Hindi has no standard orthography, and SentiMix additionally contains hashtags, mentions, emoji and English slang, so the vocabulary is long-tailed.\\
+\textbf{Normalization.} Work ranges from non-standard-word handling~\cite{sproat2001normalization} and lexical normalization of tweets~\cite{han2011lexical,baldwin2015shared} to code-mixed settings: Singh et al.~\cite{singh2018automatic} cluster Hindi--English spelling variants with word embeddings and report gains on POS tagging and sentiment, and van der Goot et al.~\cite{vandergoot2021lexical} study normalization of code-switched data for POS tagging. Eisenstein~\cite{eisenstein2013bad} asks whether to normalize the text or adapt the model; sub-word models~\cite{bojanowski2017enriching} are the model-side answer. Dictionary approaches are transparent but cover only listed forms; learned normalizers generalise at the cost of opacity and meaning drift.\\
+\textbf{Robustness evaluation.} Models can be brittle to character-level noise~\cite{belinkov2018synthetic}, and behavioural testing~\cite{ribeiro2020checklist} checks invariance to meaning-preserving perturbations. Our consistency metric follows this idea.
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.8cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.35cm}@{}}
+\toprule
+Work & Normalization & Task & Evidence reported\\
+\midrule
+\cite{sharma2015text} & rules + lexicon & Hi--En polarity & accuracy\\
+\cite{joshi2016subword} & none (sub-word LSTM) & Hi--En sentiment & accuracy, F1\\
+\cite{singh2018automatic} & unsupervised clusters & POS, sentiment & before/after scores\\
+\cite{vandergoot2021lexical} & learned normalizer & code-switched POS & POS accuracy\\
+\textbf{Ours} & audited 216-rule dictionary & SentiMix Hinglish sentiment & Macro-F1, significance, consistency, audit, churn\\
+\bottomrule
+\end{tabular}
+\caption{Closest prior work vs.\ this study.}\label{tab:lit}
+\end{table}
+\textbf{Our novelty over prior work.} Earlier studies mostly ask \emph{whether a downstream score moves}. We treat normalization as a controlled intervention and add four things (to the best of our knowledge not combined before for Hinglish sentiment): (i)~a strong, tuned baseline (word+char TF--IDF) and paired significance tests (McNemar, bootstrap), plus a \emph{retraining-churn} reference that separates the effect of rewriting from ordinary refit noise; (ii)~a \emph{consistency} metric on attested (in-dictionary) and synthetic (out-of-dictionary) variants, so invariance is reported next to Macro-F1; (iii)~a rule-level and sentence-level \emph{meaning-preservation audit} with documented exclusions (Table~\ref{tab:excl}); (iv)~a coverage and data-efficiency explanation of \emph{when} normalization helps. Our finding is deliberately negative but informative: gains seen with weaker features do not carry over once character n-grams are used.
 
 \section{Dataset and Preprocessing}
 \label{sec:data}

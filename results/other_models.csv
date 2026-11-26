@@ -1,0 +1,7 @@
+model,condition,best_param,test_macro_f1,test_accuracy
+LinearSVC,raw,0.05,0.692,0.6873
+ComplementNB,raw,1.0,0.6258,0.6427
+SGD-modhuber,raw,0.0001,0.6473,0.6423
+LinearSVC,normalized,0.05,0.6918,0.6873
+ComplementNB,normalized,1.0,0.6255,0.6433
+SGD-modhuber,normalized,0.0001,0.6522,0.6473

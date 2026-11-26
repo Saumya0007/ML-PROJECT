@@ -16,7 +16,8 @@ steps = [
     "src/audit.py",              # sentiment-preservation audit
     "src/analysis.py",           # class-wise + error analysis
     "src/make_report_tables.py", # LaTeX tables/macros for the report
-]
+    "src/othermodels.py",       # raw vs normalized for other classifiers
+    ]
 t0 = time.time()
 for s in steps:
     print(f"\n=== {s} ===", flush=True)
